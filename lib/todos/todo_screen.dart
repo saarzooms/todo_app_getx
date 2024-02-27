@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/todos/todo_model.dart';
 import 'todo_controller.dart';
+import 'todo_item.dart';
 
 class TodoScreen extends StatelessWidget {
   TodoScreen({super.key});
@@ -38,36 +39,7 @@ class TodoScreen extends StatelessWidget {
                   itemCount: controller.items.length,
                   itemBuilder: (context, index) {
                     Todo item = controller.items[index];
-                    return CheckboxListTile(
-                      secondary: SizedBox(
-                        width: 80,
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                controller.editTitle(item.id);
-                              },
-                              icon: Icon(Icons.edit),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.delete),
-                            ),
-                          ],
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      value: item.isCompleted,
-                      title: Text(
-                        item.title,
-                        style: TextStyle(
-                            color:
-                                item.isCompleted ? Colors.red : Colors.black),
-                      ),
-                      onChanged: (v) {
-                        controller.changeStatus(item.id);
-                      },
-                    );
+                    return TodoItem(item);
                   },
                 ),
               ),
